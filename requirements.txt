@@ -3,3 +3,12 @@ django
 django_bootstrap5
 django-extensions
 django-environ
+easynmt
+numpy
+transformers
+tqdm
+nltk
+fasttext
+sentencepiece
+protobuf
+torch
