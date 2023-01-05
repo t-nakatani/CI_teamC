@@ -1,0 +1,5 @@
+# pip install -r requirements.txt
+django
+django_bootstrap5
+django-extensions
+django-environ
