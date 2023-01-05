@@ -3,3 +3,6 @@ django
 django_bootstrap5
 django-extensions
 django-environ
+torch
+torchvision
+transformers[ja]
