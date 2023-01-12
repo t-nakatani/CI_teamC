@@ -36,7 +36,7 @@ query_hashtag += ' lang:ja -is:retweet' # リツイートを除外
 get_tweets = client.search_recent_tweets(
     query = query_hashtag,
     tweet_fields = ['id', 'public_metrics', 'text'],
-    max_results = 4
+    max_results = 10
 ).data
 
 tweet_num = 0
