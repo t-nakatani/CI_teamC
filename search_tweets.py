@@ -1,14 +1,18 @@
 import tweepy
- 
+import environ
+
 # ---------------------Twitter APIを使うための設定-------------------
 # 各種キー、トークンを格納
 # 機密情報は別で管理しておく
-bearer_token = '（bearer_tokenをここにかく）'
-api_key = '（api_keyをここにかく）'
-api_key_secret = '（api_key_secretをここにかく）'
-access_token = '（access_tokenをここにかく）'
-access_token_secret = '（access_token_secretをここにかく）'
- 
+env = environ.Env()
+env.read_env('.env')
+
+bearer_token = env('BEARER_TOKEN')
+api_key = env('TW_API_KEY')
+api_key_secret = env('TW_API_KEY_SECRET')
+access_token = env('ACCESS_TOKEN')
+access_token_secret = env('ACCESS_TOKEN_SECRET')
+
 # Twitterオブジェクトの生成
 client = tweepy.Client(
     bearer_token = bearer_token,
