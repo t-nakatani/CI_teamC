@@ -6,6 +6,10 @@ django_bootstrap5
 django-extensions
 django-environ
 
+# tweet
+tweepy
+environ
+
 # sentiment analysis
 torch
 torchvision
