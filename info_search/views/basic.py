@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from functions.search_tweets import get_tweepy_client, get_tweets
+from functions.sentiment_analyze import SentimentAnalysis
 import requests
+
+sa_model = SentimentAnalysis()
 
 def home(request):
     """ホームページ"""
@@ -18,5 +21,9 @@ def search_tweets(request, region):
         print('=============  search_tweets  ================')
         tweepy_client = get_tweepy_client()
         responses, texts = get_tweets(tweepy_client, region)
+        sentiments = [sa_model.get_label(txt) for txt in texts]
+        positive_responses = [r for r, s in zip(responses, sentiments) if s == 'ポジティブ']
+        if len(positive_responses) < 6:
+            return render(request, 'home.html', {'responses': positive_responses})
 
-    return render(request, 'home.html', {'responses': responses[:6]})
+    return render(request, 'home.html', {'responses': positive_responses[:6]})
