@@ -68,7 +68,7 @@ def get_tweets(tweepy_client, prefecture='大阪', purpose='グルメ'):
         tweet_fields=['id', 'public_metrics', 'text'],
         max_results=10
     ).data
-    texts = [tweet for tweet in tweets]
+    texts = [tweet.text for tweet in tweets]
 
     tweet_ids = [tweet.id for tweet in tweets]
     detailed_tweets = [tweepy_client.get_tweet(id=int(tw.id), expansions=["author_id"], user_fields=["username"]) for tw in tweets]
