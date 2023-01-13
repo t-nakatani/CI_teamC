@@ -1,7 +1,26 @@
 # pip install -r requirements.txt
+
+# django
 django
 django_bootstrap5
 django-extensions
 django-environ
+
+# tweet
+tweepy
+environ
+
+# sentiment analysis
 torch
+torchvision
 transformers[ja]
+
+# trasnlation
+easynmt
+numpy
+transformers
+tqdm
+nltk
+fasttext
+sentencepiece
+protobuf

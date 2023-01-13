@@ -2,6 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import pipeline
 
 class Sentiment_Analyze:
+
     # コンストラクタ(モデルの読み込み)
     def __init__(self):
         self.tokenizer = AutoTokenizer.from_pretrained("daigo/bert-base-japanese-sentiment")
@@ -16,7 +17,7 @@ class Sentiment_Analyze:
     def get_score(self, text):
         return self.nlp(text)[0]["score"]
 
-aaa = Sentiment_Analyze()
-text = "今日はいい天気ですね"
-print(aaa.get_label(text))  # ポジティブ
-print(aaa.get_score(text))  # 0.9780256152153015
+# model = Sentiment_Analyze()
+# text = "今日はいい天気ですね"
+# print(model.get_label(text))  # ポジティブ
+# print(model.get_score(text))  # 0.9780256152153015
