@@ -31,7 +31,7 @@ def search_tweets(request, region):
         translated_pos_texts = [
             trans_model.translate(text, target_lang='en', max_new_tokens=500) for text in positive_texts
         ]
-        [print(text) for text in translated_pos_texts]
+        [print(ja_text, '\n', en_text) for ja_text, en_text in zip(positive_texts, translated_pos_texts)]
         context = {'responses': positive_responses[:6], 'en_texts': translated_pos_texts}
 
         if len(positive_responses) < 6:
