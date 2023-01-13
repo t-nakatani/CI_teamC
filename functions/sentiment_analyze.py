@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import pipeline
 
-class Sentiment_Analyze:
+class SentimentAnalysis:
 
     # コンストラクタ(モデルの読み込み)
     def __init__(self):
@@ -17,7 +17,8 @@ class Sentiment_Analyze:
     def get_score(self, text):
         return self.nlp(text)[0]["score"]
 
-# model = Sentiment_Analyze()
-# text = "今日はいい天気ですね"
-# print(model.get_label(text))  # ポジティブ
-# print(model.get_score(text))  # 0.9780256152153015
+if __name__ == '__main__':
+    model = SentimentAnalysis()
+    text = "今日はいい天気ですね"
+    print(model.get_label(text))  # ポジティブ
+    print(model.get_score(text))  # 0.9780256152153015
