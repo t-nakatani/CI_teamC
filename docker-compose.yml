@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    image: realtime_kansai
+    container_name: realtime_kansai
+    volumes:
+      - .:/work
+    ports:
+      - "9090:9090"
