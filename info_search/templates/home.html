@@ -19,14 +19,20 @@
     </div>
     <div class="col-9 list-group gap-3">
         <div class="p-3 row">
-            {% for response in responses %} 
-            <div class="col">
-                {{ response | safe }}
+            {% for item in tweet_items %} 
+            <div class="col h-25" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.en_text }}">
+                {{ item.response | safe }}
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             {% endfor %}
         </div>
     </div>
  </div>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 
 {% endblock %}
