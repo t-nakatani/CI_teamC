@@ -39,7 +39,7 @@ def search_tweets(request, region, purpose):
             trans_model.translate(text, target_lang='en', max_new_tokens=500) for text in positive_texts
         ]
         tweet_items = [
-            {'response': response, 'en_text': en_text} for response, en_text in zip(responses, translated_pos_texts)
+            {'response': response, 'en_text': en_text} for response, en_text in zip(positive_responses, translated_pos_texts)
         ]
 
     return render(request, 'home.html', {'tweet_items': tweet_items})
