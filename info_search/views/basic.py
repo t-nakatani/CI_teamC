@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from functions.search_tweets import get_tweepy_client, get_tweets
 from functions.sentiment_analyze import SentimentAnalysis
 from easynmt import EasyNMT
-import requests  # TODO: remove
 
 sa_model = SentimentAnalysis()
 trans_model = EasyNMT('opus-mt')
@@ -18,7 +17,6 @@ def get_search_word(request):
 def home(request):
     """ホームページ"""
     if request.method == 'POST':
-        print('===========  POST  ===============')
         purpose, region = get_search_word(request)
         return redirect('search_tweets', region, purpose)
 
@@ -32,7 +30,6 @@ def search_tweets(request, region, purpose):
         return redirect('search_tweets', region)
 
     if request.method == 'GET':
-        print('=============  search_tweets  ================')
         tweepy_client = get_tweepy_client()
         responses, texts = get_tweets(tweepy_client, region, purpose)
         sentiments = [sa_model.get_label(txt) for txt in texts]
