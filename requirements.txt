@@ -24,3 +24,4 @@ nltk
 fasttext
 sentencepiece
 protobuf
+sacremoses
