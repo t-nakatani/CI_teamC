@@ -6,6 +6,7 @@ import requests  # TODO: remove
 
 sa_model = SentimentAnalysis()
 trans_model = EasyNMT('opus-mt')
+trans_model.translate('これはサンプルテキストです', target_lang='en', max_new_tokens=500)  # for load model
 
 def home(request):
     """ホームページ"""
@@ -20,7 +21,9 @@ def home(request):
 def search_tweets(request, region):
     """地域(ex. 大阪)のボタンを押した際に動作"""
     if request.method == 'POST':
-        render(request, 'home.html')
+        region = request.POST['region']
+        return redirect('search_tweets', region)
+
     if request.method == 'GET':
         print('=============  search_tweets  ================')
         tweepy_client = get_tweepy_client()
@@ -31,9 +34,8 @@ def search_tweets(request, region):
         translated_pos_texts = [
             trans_model.translate(text, target_lang='en', max_new_tokens=500) for text in positive_texts
         ]
-        [print(ja_text, '\n', en_text) for ja_text, en_text in zip(positive_texts, translated_pos_texts)]
-        context = {'responses': positive_responses[:6], 'en_texts': translated_pos_texts}
+        tweet_items = [
+            {'response': response, 'en_text': en_text} for response, en_text in zip(responses, translated_pos_texts)
+        ]
 
-        if len(positive_responses) < 6:
-            return render(request, 'home.html', context)
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', {'tweet_items': tweet_items})
