@@ -4,31 +4,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="row m-3">
-    <div class="col-3 p-3 pt-5" >
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="d-grid gap-3 mx-auto">
-                    <button class="btn btn-primary" type="submit" name="region" value="兵庫">兵庫</button>
-                    <button class="btn btn-primary" type="submit" name="region" value="大阪">大阪</button>
-                    <button class="btn btn-primary" type="submit" name="region" value="京都">京都</button>
-                    <button class="btn btn-primary" type="submit" name="region" value="奈良">奈良</button>
-                    <button class="btn btn-primary" type="submit" name="region" value="滋賀">滋賀</button>
-                    <button class="btn btn-primary" type="submit" name="region" value="和歌山">和歌山</button>
-                </div>
-            </form>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row m-3">
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="兵庫">兵庫</button>
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="大阪">大阪</button>
     </div>
-    <div class="col-9 list-group gap-3">
-        <div class="p-3 row">
-            {% for item in tweet_items %} 
-            <div class="col h-25" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.en_text }}">
-                {{ item.response | safe }}
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            {% endfor %}
-        </div>
+    <div class="row m-3">
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="京都">京都</button>
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="奈良">奈良</button>
     </div>
- </div>
+    <div class="row m-3">
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="滋賀">滋賀</button>
+        <button class="mx-5 col btn btn-primary" type="submit" name="region" value="和歌山">和歌山</button>
+    </div>
+</form>
+<div class="p-3 row">
+    {% for item in tweet_items %} 
+    <div class="col h-25" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ item.en_text }}">
+        {{ item.response | safe }}
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    {% endfor %}
+</div>
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
