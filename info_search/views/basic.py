@@ -8,26 +8,33 @@ sa_model = SentimentAnalysis()
 trans_model = EasyNMT('opus-mt')
 trans_model.translate('これはサンプルテキストです', target_lang='en', max_new_tokens=500)  # for load model
 
+def get_search_word(request):
+    """POST requestからformの内容を取得"""
+    purpose = request.POST['purpose']
+    region = request.POST['region']
+    purpose = purpose.replace('Gourmet', 'グルメ').replace('Tourism', '観光')
+    return purpose, region
+
 def home(request):
     """ホームページ"""
     if request.method == 'POST':
         print('===========  POST  ===============')
-        region = request.POST['region']
-        return redirect('search_tweets', region)
+        purpose, region = get_search_word(request)
+        return redirect('search_tweets', region, purpose)
 
     return render(request, 'home.html')
 
 
-def search_tweets(request, region):
+def search_tweets(request, region, purpose):
     """地域(ex. 大阪)のボタンを押した際に動作"""
     if request.method == 'POST':
-        region = request.POST['region']
+        purpose, region = get_search_word(request)
         return redirect('search_tweets', region)
 
     if request.method == 'GET':
         print('=============  search_tweets  ================')
         tweepy_client = get_tweepy_client()
-        responses, texts = get_tweets(tweepy_client, region)
+        responses, texts = get_tweets(tweepy_client, region, purpose)
         sentiments = [sa_model.get_label(txt) for txt in texts]
         positive_responses = [r for r, s in zip(responses, sentiments) if s == 'ポジティブ']
         positive_texts = [t for t, s in zip(texts, sentiments) if s == 'ポジティブ']

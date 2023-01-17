@@ -4,5 +4,5 @@ from info_search.views import basic
 
 urlpatterns = [
     path('', basic.home, name='home'),
-    path('<str:region>', basic.search_tweets, name='search_tweets'),
+    path('<str:region>/<str:purpose>', basic.search_tweets, name='search_tweets'),
 ]
