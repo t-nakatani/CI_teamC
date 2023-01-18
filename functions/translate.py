@@ -8,11 +8,13 @@ Original file is located at
 """
 
 from easynmt import EasyNMT
-model = EasyNMT('opus-mt')
 
-def get_translate(sentence):
-      return model.translate(sentence, target_lang='en', max_new_tokens=500) #翻訳後文章
+def get_translate(model, sentence):
+    return model.translate(sentence, target_lang='en', max_new_tokens=500)  # 翻訳後文章
 
-text = '''APIの勉強のために, Twitter apiを用いてユーザのツイート取得を行ったので, 簡単に流れをまとめました.以下が内容です.1. Twitter developerでのAPI申請2. APIを用いてのツイート取得をcurlコマンドで行う'''
-text_translated=get_translate(text)
-print(text_translated)  #Hello, it's good weather today!
+
+if __name__ == '__main__':
+    model = EasyNMT('opus-mt')
+    text = '''APIの勉強のために, Twitter apiを用いてユーザのツイート取得を行ったので, 簡単に流れをまとめました.以下が内容です.1. Twitter developerでのAPI申請2. APIを用いてのツイート取得をcurlコマンドで行う'''
+    text_translated = get_translate(text)
+    print(text_translated)  # Hello, it's good weather today!

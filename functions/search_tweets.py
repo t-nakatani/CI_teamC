@@ -47,7 +47,7 @@ def get_tweepy_client():
 # -------------------この部分をアプリ画面で操作する------------------
 # 例えば、「大阪」の「グルメ」を知りたいとする
 
-def get_tweets(tweepy_client, prefecture='大阪', purpose='グルメ'):
+def get_tweets(tweepy_client, prefecture='大阪', purpose='グルメ', max_num_tweet=5):
     """
     prefecture: '京都','兵庫','奈良','滋賀'など
     purpose: '観光'など
@@ -65,7 +65,7 @@ def get_tweets(tweepy_client, prefecture='大阪', purpose='グルメ'):
         query=query_hashtag,
         tweet_fields=['id', 'public_metrics', 'text'],
         max_results=10
-    ).data
+    ).data[:max_num_tweet]
     texts = [tweet.text for tweet in tweets]
 
     tweet_ids = [tweet.id for tweet in tweets]
